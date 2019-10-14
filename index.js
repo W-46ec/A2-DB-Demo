@@ -26,18 +26,17 @@ app.set('view engine', 'ejs')
 app.get('/', (req, res) => res.render('pages/index'))
 
 app.get('/home', (req, res) => {
-	let cmd = `SELECT * FROM Tokimon`
+	let cmd = `SELECT * FROM Tokimon ORDER BY uid`
 	pool.query(cmd, (err, results) => {
 		if (err) {
 			console.log(err)
 			res.send('500 error')
 		}
-		res.render('pages/home', {'rows': results.rows})
+		res.render('pages/home', { 'rows': results.rows })
 	})
 })
 
 app.get('/new', (req, res) => { res.render('pages/new') })
-
 app.post('/add', (req, res) => {
 	let body = req.body
 	if (body.name.length === 0) {
@@ -62,6 +61,60 @@ app.post('/add', (req, res) => {
 			res.send('200 OK')
 		}
 	})
+})
+
+app.get('/edit', (req, res) => {
+	if (req.query.id) {
+		let id = req.query.id
+		let cmd = `SELECT * FROM Tokimon WHERE uid=${ id }`
+		pool.query(cmd, (err, results) => {
+			if (err) {
+				console.log(err)
+				res.send('500 error')
+			}
+			if (results.rows.length === 0) {
+				res.send('not found')
+			} else {
+				res.render('pages/edit', {
+					'rows': results.rows[0]
+				})
+			}
+		})
+	} else {
+		res.send('Invalid parameter')
+	}
+})
+app.post('/update', (req, res) => {
+	if (req.query.id) {
+		let id = req.query.id
+		let body = req.body
+		if (body.name.length === 0) {
+			res.send('Invalid inputs')
+		}
+		Object.entries(body).forEach((e) => {
+			if (e[1].length === 0) {
+				if (e[0] != 'trainer') {
+					body[e[0]] = 0
+				}
+			}
+		})
+		let cmd = `UPDATE Tokimon SET 
+			name=$1, weight=$2, height=$3, fly=$4, fight=$5,  
+			fire=$6, water=$7, electric=$8, frozen=$9, trainer=$10
+			WHERE uid=${ id }`
+		pool.query(cmd, Object.values(body), (err, results) => {
+			if (err) {
+				console.log(err)
+				res.send('500 error')
+			} else {
+				console.log(results)
+				res.redirect(`/edit?id=${ id }`)
+				// res.send('200 OK')
+			}
+		})
+	} else {
+		res.send('Invalid parameter')
+	}
 })
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))

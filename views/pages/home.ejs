@@ -48,8 +48,8 @@
             <td><%= e.trainer %></td>
             <td>
               <div>
-                <a class="operations" href="/edit?id=">Edit</a>
-                <a class="operations" href="/remove?id=">Remove</a>
+                <a class="operations" href="/edit?id=<%= e.uid %>">Edit</a>
+                <a class="operations" href="/remove?id=<%= e.uid %>">Remove</a>
               </div>
             </td>
           </tr>

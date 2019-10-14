@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Tokimon - Add</title>
+  <title>Tokimon - Edit</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/form.css">
   <script type="text/javascript" src="/js/form.js" defer></script>
 </head>
@@ -20,51 +20,51 @@
   <div class="column">
     <div class="form-container">
       <div class="border">
-        <div class="form-font">Add New Tokimon</div>
-        <form action="/add" method="post">
+        <div class="form-font">Edit Tokimon</div>
+        <form action="/update?id=<%= rows.uid %>" method="post">
           <div class="entry">
-            <div class="title">Name *</div>
-            <input type="text" class="input" name="name" placeholder="0 to 100">
+            <div class="title">Name</div>
+            <input type="text" class="input" name="name" value="<%= rows.name %>">
           </div>
           <div class="entry">
             <div class="title">Weight</div>
-            <input type="text" class="input" name="weight" placeholder="0 to 100">
+            <input type="text" class="input" name="weight" placeholder="0 to 100" value="<%= rows.weight %>">
           </div>
           <div class="entry">
             <div class="title">Height</div>
-            <input type="text" class="input" name="height" placeholder="0 to 100">
+            <input type="text" class="input" name="height" placeholder="0 to 100" value="<%= rows.height %>">
           </div>
           <div class="entry">
             <div class="title">Fly</div>
-            <input type="text" class="input" name="fly" placeholder="0 to 100">
+            <input type="text" class="input" name="fly" placeholder="0 to 100" value="<%= rows.fly %>">
           </div>
           <div class="entry">
             <div class="title">Fight</div>
-            <input type="text" class="input" name="fight" placeholder="0 to 100">
+            <input type="text" class="input" name="fight" placeholder="0 to 100" value="<%= rows.fight %>">
           </div>
           <div class="entry">
             <div class="title">Fly</div>
-            <input type="text" class="input" name="fire" placeholder="0 to 100">
+            <input type="text" class="input" name="fire" placeholder="0 to 100" value="<%= rows.fire %>">
           </div>
           <div class="entry">
             <div class="title">Water</div>
-            <input type="text" class="input" name="water" placeholder="0 to 100">
+            <input type="text" class="input" name="water" placeholder="0 to 100" value="<%= rows.water %>">
           </div>
           <div class="entry">
             <div class="title">Electric</div>
-            <input type="text" class="input" name="electric" placeholder="0 to 100">
+            <input type="text" class="input" name="electric" placeholder="0 to 100" value="<%= rows.electric %>">
           </div>
           <div class="entry">
             <div class="title">Frozen</div>
-            <input type="text" class="input" name="frozen" placeholder="0 to 100">
+            <input type="text" class="input" name="frozen" placeholder="0 to 100" value="<%= rows.frozen %>">
           </div>
           <div class="entry">
             <div class="title">Trainer</div>
-            <input type="text" class="input" name="trainer">
+            <input type="text" class="input" name="trainer" value="<%= rows.trainer %>">
           </div>
           <div class="button-container">
             <button type="button" onclick="goBack()" class="button">Back</button>
-            <button type="submit" class="button">Submit</button>
+            <button type="submit" class="button">Save</button>
           </div>
         </form>
       </div>
