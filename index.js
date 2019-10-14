@@ -77,8 +77,8 @@ app.post('/add', (req, res) => {
 		}
 	})
 	let cmd = `INSERT INTO Tokimon (
-		name, weight, height, fly, fight, fire, water, electric, frozen, trainer
-	) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`
+		name, age, weight, height, fly, fight, fire, water, electric, frozen, trainer
+	) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`
 	pool.query(cmd, Object.values(body), (err, results) => {
 		if (err) {
 			// console.log(err)
@@ -131,8 +131,8 @@ app.post('/update', (req, res) => {
 			}
 		})
 		let cmd = `UPDATE Tokimon SET 
-			name=$1, weight=$2, height=$3, fly=$4, fight=$5,  
-			fire=$6, water=$7, electric=$8, frozen=$9, trainer=$10
+			name=$1, age=$2, weight=$3, height=$4, fly=$5, fight=$6,  
+			fire=$7, water=$8, electric=$9, frozen=$10, trainer=$11
 			WHERE uid=${ id }`
 		pool.query(cmd, Object.values(body), (err, results) => {
 			if (err) {

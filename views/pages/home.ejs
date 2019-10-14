@@ -21,6 +21,7 @@
   </div>
   <div class="column">
     <div class="table-container">
+      <div class="title-font">Tokimons</div>
       <table id="table">
         <tr>
           <th class="th-id">ID</th>
@@ -33,7 +34,7 @@
           <tr>
             <td><%= idx + 1 %></td>
             <td><a class="link" title="Details" href="/details?id=<%= e.uid %>"><%= e.name %></a></td>
-            <td>-</td>
+            <td><%= e.age %></td>
             <td><a class="link" title="Trainer Details" href="/trainer?trainer=<%= e.trainer %>"><%= e.trainer %></a></td>
             <td>
               <div>
