@@ -7,14 +7,16 @@
 </head>
 <body>
   <div class="nav-bar">
-    <ul>
-      <li class="nav-home">
-        <a href="/home">Home</a>
-      </li>
-      <li class="nav-add">
-        <a href="/new">Add</a>
-      </li>
-    </ul>
+    <div class="nav-bar-align">
+      <ul>
+        <li class="nav-home">
+          <a class="nav-font" href="/home">Home</a>
+        </li>
+        <li class="nav-add">
+          <a class="nav-font" href="/new">Add</a>
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="column">
     <div class="table-container">
@@ -36,7 +38,7 @@
         <% rows.forEach((e, idx) => { %>
           <tr>
             <td><%= idx + 1 %></td>
-            <td><%= e.name %></td>
+            <td><a class="operations" title="Details" href=""><%= e.name %></a></td>
             <td><%= e.weight %></td>
             <td><%= e.height %></td>
             <td><%= e.fly %></td>
@@ -48,8 +50,8 @@
             <td><%= e.trainer %></td>
             <td>
               <div>
-                <a class="operations" href="/edit?id=<%= e.uid %>">Edit</a>
-                <a class="operations" href="/remove?id=<%= e.uid %>">Remove</a>
+                <a class="operations" title="Edit" href="/edit?id=<%= e.uid %>">Edit</a>
+                <a class="operations" title="Remove" href="/remove?id=<%= e.uid %>" onclick="return confirm('Are you sure you want to delete?')">Remove</a>
               </div>
             </td>
           </tr>

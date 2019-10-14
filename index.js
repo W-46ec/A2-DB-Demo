@@ -117,4 +117,25 @@ app.post('/update', (req, res) => {
 	}
 })
 
+app.get('/remove', (req, res) => {
+	if (req.query.id) {
+		let id = req.query.id
+		let cmd = `DELETE FROM Tokimon WHERE uid=${ id }`
+		pool.query(cmd, (err, results) => {
+			if (err) {
+				console.log(err)
+				res.send('500 error')
+			} else {
+				if (results.rowCount === 1) {
+					res.send('OK')
+				} else {
+					res.send('Deleted 0 row')
+				}
+			}
+		})
+	} else {
+		res.send('Invalid parameter')
+	}
+})
+
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
