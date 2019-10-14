@@ -1,5 +1,5 @@
 
-/* style.css */
+/* home.css */
 
 body {
 	margin: 0px;
@@ -57,6 +57,12 @@ th {
 td {
 	padding-top: 0.6%;
 	padding-bottom: 0.6%;
+}
+
+.operations {
+	/*float: left;*/
+	padding-left: 7px;
+	color: #1e3c64;
 }
 
 a {

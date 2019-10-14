@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Tokimon - Home</title>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/home.css">
 </head>
 <body>
   <div class="nav-bar">
     <ul>
       <li class="nav-home">
-        <a href="">Home</a>
+        <a href="/home">Home</a>
       </li>
       <li class="nav-add">
-        <a href="">Add</a>
+        <a href="/new">Add</a>
       </li>
     </ul>
   </div>
@@ -31,10 +31,11 @@
           <th>Electric</th>
           <th>Frozen</th>
           <th>Trainer</th>
+          <th></th>
         </tr>
-        <% rows.forEach((e) => { %>
+        <% rows.forEach((e, idx) => { %>
           <tr>
-            <td><%= e.uid %></td>
+            <td><%= idx + 1 %></td>
             <td><%= e.name %></td>
             <td><%= e.weight %></td>
             <td><%= e.height %></td>
@@ -45,6 +46,12 @@
             <td><%= e.electric %></td>
             <td><%= e.frozen %></td>
             <td><%= e.trainer %></td>
+            <td>
+              <div>
+                <a class="operations" href="/edit?id=">Edit</a>
+                <a class="operations" href="/remove?id=">Remove</a>
+              </div>
+            </td>
           </tr>
         <% }) %>
       </table>

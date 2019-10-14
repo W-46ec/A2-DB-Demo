@@ -24,6 +24,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => res.render('pages/index'))
+
 app.get('/home', (req, res) => {
 	let cmd = `SELECT * FROM Tokimon`
 	pool.query(cmd, (err, results) => {
@@ -32,6 +33,34 @@ app.get('/home', (req, res) => {
 			res.send('500 error')
 		}
 		res.render('pages/home', {'rows': results.rows})
+	})
+})
+
+app.get('/new', (req, res) => { res.render('pages/new') })
+
+app.post('/add', (req, res) => {
+	let body = req.body
+	if (body.name.length === 0) {
+		res.send('Invalid inputs')
+	}
+	Object.entries(body).forEach((e) => {
+		if (e[1].length === 0) {
+			if (e[0] != 'trainer') {
+				body[e[0]] = 0
+			}
+		}
+	})
+	let cmd = `INSERT INTO Tokimon (
+		name, weight, height, fly, fight, fire, water, electric, frozen, trainer
+	) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`
+	pool.query(cmd, Object.values(body), (err, results) => {
+		if (err) {
+			// console.log(err)
+			res.send('500 error')
+		} else {
+			// console.log(results)
+			res.send('200 OK')
+		}
 	})
 })
 

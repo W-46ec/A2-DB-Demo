@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tokimon - Add</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/new.css">
+  <script type="text/javascript" src="/js/new.js" defer></script>
+</head>
+<body>
+  <div class="nav-bar">
+    <ul>
+      <li class="nav-home">
+        <a href="/home">Home</a>
+      </li>
+      <li class="nav-add">
+        <a href="/new">Add</a>
+      </li>
+    </ul>
+  </div>
+  <div class="column">
+    <div class="form-container">
+      <div class="border">
+        <div class="form-font">Add New Tokimon</div>
+        <form action="/add" method="post">
+          <div class="entry">
+            <div class="title">Name</div>
+            <input type="text" class="input" name="name">
+          </div>
+          <div class="entry">
+            <div class="title">Weight</div>
+            <input type="text" class="input" name="weight">
+          </div>
+          <div class="entry">
+            <div class="title">Height</div>
+            <input type="text" class="input" name="height">
+          </div>
+          <div class="entry">
+            <div class="title">Fly</div>
+            <input type="text" class="input" name="fly">
+          </div>
+          <div class="entry">
+            <div class="title">Fight</div>
+            <input type="text" class="input" name="fight">
+          </div>
+          <div class="entry">
+            <div class="title">Fly</div>
+            <input type="text" class="input" name="fire">
+          </div>
+          <div class="entry">
+            <div class="title">Water</div>
+            <input type="text" class="input" name="water">
+          </div>
+          <div class="entry">
+            <div class="title">Electric</div>
+            <input type="text" class="input" name="electric">
+          </div>
+          <div class="entry">
+            <div class="title">Frozen</div>
+            <input type="text" class="input" name="frozen">
+          </div>
+          <div class="entry">
+            <div class="title">Trainer</div>
+            <input type="text" class="input" name="trainer">
+          </div>
+          <div class="button-container">
+            <button type="button" onclick="goBack()" class="button">Back</button>
+            <button type="submit" class="button">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
