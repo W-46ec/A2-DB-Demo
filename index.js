@@ -36,6 +36,33 @@ app.get('/home', (req, res) => {
 	})
 })
 
+app.get('/details', (req, res) => {
+	if (req.query.id) {
+		let id = req.query.id
+		let cmd = `SELECT * FROM Tokimon WHERE uid=${ id }`
+		pool.query(cmd, (err, results) => {
+			if (err) {
+				console.log(err)
+				res.send('500 error')
+			}
+			if (results.rows.length === 0) {
+				res.send('not found')
+			} else {
+				res.render('pages/edit', {
+					'title': "Details", 
+					'readOnly': "readonly", 
+					'inputClass': "detail-input", 
+					'hiddenEdit': "", 
+					'hiddenSave': "hidden", 
+					'rows': results.rows[0]
+				})
+			}
+		})
+	} else {
+		res.send('Invalid parameter')
+	}
+})
+
 app.get('/new', (req, res) => { res.render('pages/new') })
 app.post('/add', (req, res) => {
 	let body = req.body
@@ -76,6 +103,11 @@ app.get('/edit', (req, res) => {
 				res.send('not found')
 			} else {
 				res.render('pages/edit', {
+					'title': "Edit Tokimon", 
+					'readOnly': "", 
+					'inputClass': "edit-input", 
+					'hiddenEdit': "hidden", 
+					'hiddenSave': "", 
 					'rows': results.rows[0]
 				})
 			}
@@ -108,7 +140,7 @@ app.post('/update', (req, res) => {
 				res.send('500 error')
 			} else {
 				console.log(results)
-				res.redirect(`/edit?id=${ id }`)
+				res.redirect(`/details?id=${ id }`)
 				// res.send('200 OK')
 			}
 		})
@@ -131,6 +163,29 @@ app.get('/remove', (req, res) => {
 				} else {
 					res.send('Deleted 0 row')
 				}
+			}
+		})
+	} else {
+		res.send('Invalid parameter')
+	}
+})
+
+app.get('/trainer', (req, res) => {
+	if (req.query.trainer) {
+		let trainer = req.query.trainer
+		let cmd = `SELECT * FROM Tokimon WHERE trainer='${ trainer }'`
+		pool.query(cmd, (err, results) => {
+			if (err) {
+				console.log(err)
+				res.send('500 error')
+			}
+			if (results.rows.length === 0) {
+				res.send('not found')
+			} else {
+				res.render('pages/trainer', {
+					'trainer': trainer, 
+					'rows': results.rows
+				})
 			}
 		})
 	} else {

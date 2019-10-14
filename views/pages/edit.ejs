@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Tokimon - Edit</title>
+  <title>Tokimon - <%= title %></title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/form.css">
-  <script type="text/javascript" src="/js/script.js" defer></script>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/Nav.css">
 </head>
 <body>
   <div class="nav-bar">
@@ -22,51 +22,52 @@
   <div class="column">
     <div class="form-container">
       <div class="border">
-        <div class="form-font">Edit Tokimon</div>
+        <div class="form-font"><%= title %></div>
         <form action="/update?id=<%= rows.uid %>" method="post">
           <div class="entry">
             <div class="title">Name</div>
-            <input type="text" class="input" name="name" value="<%= rows.name %>">
+            <input type="text" class="<%= inputClass %>" name="name" value="<%= rows.name %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Weight</div>
-            <input type="text" class="input" name="weight" placeholder="0 to 100" value="<%= rows.weight %>">
+            <input type="text" class="<%= inputClass %>" name="weight" placeholder="0 to 100" value="<%= rows.weight %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Height</div>
-            <input type="text" class="input" name="height" placeholder="0 to 100" value="<%= rows.height %>">
+            <input type="text" class="<%= inputClass %>" name="height" placeholder="0 to 100" value="<%= rows.height %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Fly</div>
-            <input type="text" class="input" name="fly" placeholder="0 to 100" value="<%= rows.fly %>">
+            <input type="text" class="<%= inputClass %>" name="fly" placeholder="0 to 100" value="<%= rows.fly %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Fight</div>
-            <input type="text" class="input" name="fight" placeholder="0 to 100" value="<%= rows.fight %>">
+            <input type="text" class="<%= inputClass %>" name="fight" placeholder="0 to 100" value="<%= rows.fight %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Fly</div>
-            <input type="text" class="input" name="fire" placeholder="0 to 100" value="<%= rows.fire %>">
+            <input type="text" class="<%= inputClass %>" name="fire" placeholder="0 to 100" value="<%= rows.fire %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Water</div>
-            <input type="text" class="input" name="water" placeholder="0 to 100" value="<%= rows.water %>">
+            <input type="text" class="<%= inputClass %>" name="water" placeholder="0 to 100" value="<%= rows.water %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Electric</div>
-            <input type="text" class="input" name="electric" placeholder="0 to 100" value="<%= rows.electric %>">
+            <input type="text" class="<%= inputClass %>" name="electric" placeholder="0 to 100" value="<%= rows.electric %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Frozen</div>
-            <input type="text" class="input" name="frozen" placeholder="0 to 100" value="<%= rows.frozen %>">
+            <input type="text" class="<%= inputClass %>" name="frozen" placeholder="0 to 100" value="<%= rows.frozen %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Trainer</div>
-            <input type="text" class="input" name="trainer" value="<%= rows.trainer %>">
+            <input type="text" class="<%= inputClass %>" name="trainer" value="<%= rows.trainer %>" <%- readOnly %>>
           </div>
           <div class="button-container">
-            <button type="button" onclick="goBack()" class="button">Back</button>
-            <button type="submit" class="button">Save</button>
+            <button type="button" onclick="window.location.href='/home'" class="button">Home</button>
+            <button type="button" onclick="window.location.href='/edit?id=<%= rows.uid %>'" class="button" <%- hiddenEdit %>>Edit</button>
+            <button type="submit" class="button" <%- hiddenSave %>>Save</button>
           </div>
         </form>
       </div>
