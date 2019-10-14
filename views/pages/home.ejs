@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tokimon - Home</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+</head>
+<body>
+  <div class="nav-bar">
+    <ul>
+      <li class="nav-home">
+        <a href="">Home</a>
+      </li>
+      <li class="nav-add">
+        <a href="">Add</a>
+      </li>
+    </ul>
+  </div>
+  <div class="column">
+    <div class="table-container">
+      <table id="table">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Weight</th>
+          <th>Height</th>
+          <th>Fly</th>
+          <th>Fight</th>
+          <th>Fire</th>
+          <th>Water</th>
+          <th>Electric</th>
+          <th>Frozen</th>
+          <th>Trainer</th>
+        </tr>
+        <% rows.forEach((e) => { %>
+          <tr>
+            <td><%= e.uid %></td>
+            <td><%= e.name %></td>
+            <td><%= e.weight %></td>
+            <td><%= e.height %></td>
+            <td><%= e.fly %></td>
+            <td><%= e.fight %></td>
+            <td><%= e.fire %></td>
+            <td><%= e.water %></td>
+            <td><%= e.electric %></td>
+            <td><%= e.frozen %></td>
+            <td><%= e.trainer %></td>
+          </tr>
+        <% }) %>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
