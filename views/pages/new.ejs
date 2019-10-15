@@ -5,6 +5,7 @@
   <title>Tokimon - Add</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/form.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/Nav.css">
+  <script type="text/javascript" src="/js/script.js" defer></script>
 </head>
 <body>
   <div class="nav-bar">
@@ -25,44 +26,44 @@
         <div class="form-font">Add New Tokimon</div>
         <form action="/add" method="post">
           <div class="entry">
-            <div class="title">Name *</div>
-            <input type="text" class="edit-input" name="name" placeholder="Name of Tokimon">
+            <div id="name" class="title">Name *</div>
+            <input type="text" class="edit-input" name="name" placeholder="Name of Tokimon" title="This field is required" required>
           </div>
           <div class="entry">
             <div class="title">Age</div>
-            <input type="text" class="edit-input" name="age" placeholder="Age">
+            <input type="number" min="0" max="100" class="edit-input" name="age" placeholder="Age of Tokimon" id="num">
           </div>
           <div class="entry">
             <div class="title">Weight</div>
-            <input type="text" class="edit-input" name="weight" placeholder="0 to 100">
+            <input type="text" class="edit-input" name="weight" placeholder="0 to 100" id="num">
           </div>
           <div class="entry">
             <div class="title">Height</div>
-            <input type="text" class="edit-input" name="height" placeholder="0 to 100">
+            <input type="number" min="0" max="100" type="text" class="edit-input" name="height" placeholder="0 to 100" id="num">
           </div>
           <div class="entry">
             <div class="title">Fly</div>
-            <input type="text" class="edit-input" name="fly" placeholder="0 to 100">
+            <input type="number" min="0" max="100" type="text" class="edit-input" name="fly" placeholder="0 to 100" id="num">
           </div>
           <div class="entry">
             <div class="title">Fight</div>
-            <input type="text" class="edit-input" name="fight" placeholder="0 to 100">
+            <input type="number" min="0" max="100" type="text" class="edit-input" name="fight" placeholder="0 to 100" id="num">
           </div>
           <div class="entry">
             <div class="title">Fly</div>
-            <input type="text" class="edit-input" name="fire" placeholder="0 to 100">
+            <input type="number" min="0" max="100" type="text" class="edit-input" name="fire" placeholder="0 to 100" id="num">
           </div>
           <div class="entry">
             <div class="title">Water</div>
-            <input type="text" class="edit-input" name="water" placeholder="0 to 100">
+            <input type="number" min="0" max="100" type="text" class="edit-input" name="water" placeholder="0 to 100" id="num">
           </div>
           <div class="entry">
             <div class="title">Electric</div>
-            <input type="text" class="edit-input" name="electric" placeholder="0 to 100">
+            <input type="number" min="0" max="100" type="text" class="edit-input" name="electric" placeholder="0 to 100" id="num">
           </div>
           <div class="entry">
             <div class="title">Frozen</div>
-            <input type="text" class="edit-input" name="frozen" placeholder="0 to 100">
+            <input type="number" min="0" max="100" type="text" class="edit-input" name="frozen" placeholder="0 to 100" id="num">
           </div>
           <div class="entry">
             <div class="title">Trainer</div>

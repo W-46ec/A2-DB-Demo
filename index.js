@@ -58,7 +58,7 @@ app.get('/details', (req, res) => {
 					'msg': "Sorry~ The Tokimon you are looking for does not exist"
 				})
 			} else {
-				res.render('pages/edit', {
+				res.render('pages/form', {
 					'title': "Details", 
 					'readOnly': "readonly", 
 					'inputClass': "detail-input", 
@@ -86,11 +86,14 @@ app.post('/add', (req, res) => {
 			'msgTitle': "Invalid inputs", 
 			'msg': "Sorry~ Seems like the request is not valid"
 		})
+		return;
 	}
 	Object.entries(body).forEach((e) => {
 		if (e[1].length === 0) {
 			if (e[0] != 'trainer') {
 				body[e[0]] = 0
+			} else {
+				body[e[0]] = "unknown"
 			}
 		}
 	})
@@ -104,13 +107,12 @@ app.post('/add', (req, res) => {
 				'msgTitle': "Error", 
 				'msg': "Ooopps! Errors occured!"
 			})
-		} else {
-			res.render('pages/msg', {
-				'code': 200, 
-				'msgTitle': "Success", 
-				'msg': "Your Tokimon has been successfully added!"
-			})
 		}
+		res.render('pages/msg', {
+			'code': 200, 
+			'msgTitle': "Success", 
+			'msg': "Your Tokimon has been added successfully!"
+		})
 	})
 })
 
@@ -133,7 +135,7 @@ app.get('/edit', (req, res) => {
 					'msg': "Sorry~ The Tokimon you are looking for does not exist"
 				})
 			} else {
-				res.render('pages/edit', {
+				res.render('pages/form', {
 					'title': "Edit Tokimon", 
 					'readOnly': "", 
 					'inputClass': "edit-input", 
@@ -161,11 +163,14 @@ app.post('/update', (req, res) => {
 				'msgTitle': "Invalid inputs", 
 				'msg': "Sorry~ Seems like the request is not valid"
 			})
+			return;
 		}
 		Object.entries(body).forEach((e) => {
 			if (e[1].length === 0) {
 				if (e[0] != 'trainer') {
 					body[e[0]] = 0
+				} else {
+					body[e[0]] = "unknown"
 				}
 			}
 		})
@@ -181,7 +186,6 @@ app.post('/update', (req, res) => {
 					'msg': "Ooopps! Errors occured!"
 				})
 			} else {
-				console.log(results)
 				res.redirect(`/details?id=${ id }`)
 			}
 		})
@@ -210,7 +214,7 @@ app.get('/remove', (req, res) => {
 					res.render('pages/msg', {
 						'code': 200, 
 						'msgTitle': "Success", 
-						'msg': "Your Tokimon has been successfully removed from the list"
+						'msg': "Your Tokimon has been removed from the list"
 					})
 				} else {
 					res.render('pages/msg', {

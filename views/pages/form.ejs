@@ -5,6 +5,7 @@
   <title>Tokimon - <%= title %></title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/form.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/Nav.css">
+  <script type="text/javascript" src="/js/script.js" defer></script>
 </head>
 <body>
   <div class="nav-bar">
@@ -25,44 +26,44 @@
         <div class="form-font"><%= title %></div>
         <form action="/update?id=<%= rows.uid %>" method="post">
           <div class="entry">
-            <div class="title">Name</div>
-            <input type="text" class="<%= inputClass %>" name="name" placeholder="Name of Tokimon" value="<%= rows.name %>" <%- readOnly %>>
+            <div id="name" class="title">Name *</div>
+            <input type="text" class="<%= inputClass %>" name="name" placeholder="Name of Tokimon" value="<%= rows.name %>" required <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Age</div>
-            <input type="text" class="<%= inputClass %>" name="age" placeholder="Age" value="<%= rows.age %>" <%- readOnly %>>
+            <input type="number" min="0" max="100" type="text" class="<%= inputClass %>" name="age" placeholder="Age of Tokimon" value="<%= rows.age %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Weight</div>
-            <input type="text" class="<%= inputClass %>" name="weight" placeholder="0 to 100" value="<%= rows.weight %>" <%- readOnly %>>
+            <input type="number" min="0" max="100" type="text" class="<%= inputClass %>" name="weight" placeholder="0 to 100" value="<%= rows.weight %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Height</div>
-            <input type="text" class="<%= inputClass %>" name="height" placeholder="0 to 100" value="<%= rows.height %>" <%- readOnly %>>
+            <input type="number" min="0" max="100" type="text" class="<%= inputClass %>" name="height" placeholder="0 to 100" value="<%= rows.height %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Fly</div>
-            <input type="text" class="<%= inputClass %>" name="fly" placeholder="0 to 100" value="<%= rows.fly %>" <%- readOnly %>>
+            <input type="number" min="0" max="100" type="text" class="<%= inputClass %>" name="fly" placeholder="0 to 100" value="<%= rows.fly %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Fight</div>
-            <input type="text" class="<%= inputClass %>" name="fight" placeholder="0 to 100" value="<%= rows.fight %>" <%- readOnly %>>
+            <input type="number" min="0" max="100" type="text" class="<%= inputClass %>" name="fight" placeholder="0 to 100" value="<%= rows.fight %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Fly</div>
-            <input type="text" class="<%= inputClass %>" name="fire" placeholder="0 to 100" value="<%= rows.fire %>" <%- readOnly %>>
+            <input type="number" min="0" max="100" type="text" class="<%= inputClass %>" name="fire" placeholder="0 to 100" value="<%= rows.fire %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Water</div>
-            <input type="text" class="<%= inputClass %>" name="water" placeholder="0 to 100" value="<%= rows.water %>" <%- readOnly %>>
+            <input type="number" min="0" max="100" type="text" class="<%= inputClass %>" name="water" placeholder="0 to 100" value="<%= rows.water %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Electric</div>
-            <input type="text" class="<%= inputClass %>" name="electric" placeholder="0 to 100" value="<%= rows.electric %>" <%- readOnly %>>
+            <input type="number" min="0" max="100" type="text" class="<%= inputClass %>" name="electric" placeholder="0 to 100" value="<%= rows.electric %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Frozen</div>
-            <input type="text" class="<%= inputClass %>" name="frozen" placeholder="0 to 100" value="<%= rows.frozen %>" <%- readOnly %>>
+            <input type="number" min="0" max="100" type="text" class="<%= inputClass %>" name="frozen" placeholder="0 to 100" value="<%= rows.frozen %>" <%- readOnly %>>
           </div>
           <div class="entry">
             <div class="title">Trainer</div>
