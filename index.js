@@ -29,8 +29,11 @@ app.get('/home', (req, res) => {
 	let cmd = `SELECT * FROM Tokimon ORDER BY uid`
 	pool.query(cmd, (err, results) => {
 		if (err) {
-			console.log(err)
-			res.send('500 error')
+			res.render('pages/msg', {
+				'code': 500, 
+				'msgTitle': "Error", 
+				'msg': "Ooopps! Errors occured!"
+			})
 		}
 		res.render('pages/home', { 'rows': results.rows })
 	})
@@ -42,11 +45,18 @@ app.get('/details', (req, res) => {
 		let cmd = `SELECT * FROM Tokimon WHERE uid=${ id }`
 		pool.query(cmd, (err, results) => {
 			if (err) {
-				console.log(err)
-				res.send('500 error')
+				res.render('pages/msg', {
+					'code': 500, 
+					'msgTitle': "Error", 
+					'msg': "Ooopps! Errors occured!"
+				})
 			}
 			if (results.rows.length === 0) {
-				res.send('not found')
+				res.render('pages/msg', {
+					'code': 404, 
+					'msgTitle': "Not found", 
+					'msg': "Sorry~ The Tokimon you are looking for does not exist"
+				})
 			} else {
 				res.render('pages/edit', {
 					'title': "Details", 
@@ -59,7 +69,11 @@ app.get('/details', (req, res) => {
 			}
 		})
 	} else {
-		res.send('Invalid parameter')
+		res.render('pages/msg', {
+			'code': 404, 
+			'msgTitle': "Not found", 
+			'msg': "Sorry~ The Tokimon you are looking for does not exist"
+		})
 	}
 })
 
@@ -67,7 +81,11 @@ app.get('/new', (req, res) => { res.render('pages/new') })
 app.post('/add', (req, res) => {
 	let body = req.body
 	if (body.name.length === 0) {
-		res.send('Invalid inputs')
+		res.render('pages/msg', {
+			'code': 404, 
+			'msgTitle': "Invalid inputs", 
+			'msg': "Sorry~ Seems like the request is not valid"
+		})
 	}
 	Object.entries(body).forEach((e) => {
 		if (e[1].length === 0) {
@@ -81,11 +99,17 @@ app.post('/add', (req, res) => {
 	) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`
 	pool.query(cmd, Object.values(body), (err, results) => {
 		if (err) {
-			// console.log(err)
-			res.send('500 error')
+			res.render('pages/msg', {
+				'code': 500, 
+				'msgTitle': "Error", 
+				'msg': "Ooopps! Errors occured!"
+			})
 		} else {
-			// console.log(results)
-			res.send('200 OK')
+			res.render('pages/msg', {
+				'code': 200, 
+				'msgTitle': "Success", 
+				'msg': "Your Tokimon has been successfully added!"
+			})
 		}
 	})
 })
@@ -96,11 +120,18 @@ app.get('/edit', (req, res) => {
 		let cmd = `SELECT * FROM Tokimon WHERE uid=${ id }`
 		pool.query(cmd, (err, results) => {
 			if (err) {
-				console.log(err)
-				res.send('500 error')
+				res.render('pages/msg', {
+					'code': 500, 
+					'msgTitle': "Error", 
+					'msg': "Ooopps! Errors occured!"
+				})
 			}
 			if (results.rows.length === 0) {
-				res.send('not found')
+				res.render('pages/msg', {
+					'code': 404, 
+					'msgTitle': "Not found", 
+					'msg': "Sorry~ The Tokimon you are looking for does not exist"
+				})
 			} else {
 				res.render('pages/edit', {
 					'title': "Edit Tokimon", 
@@ -113,7 +144,11 @@ app.get('/edit', (req, res) => {
 			}
 		})
 	} else {
-		res.send('Invalid parameter')
+		res.render('pages/msg', {
+			'code': 404, 
+			'msgTitle': "Not found", 
+			'msg': "Sorry~ The Tokimon you are looking for does not exist"
+		})
 	}
 })
 app.post('/update', (req, res) => {
@@ -121,7 +156,11 @@ app.post('/update', (req, res) => {
 		let id = req.query.id
 		let body = req.body
 		if (body.name.length === 0) {
-			res.send('Invalid inputs')
+			res.render('pages/msg', {
+				'code': 404, 
+				'msgTitle': "Invalid inputs", 
+				'msg': "Sorry~ Seems like the request is not valid"
+			})
 		}
 		Object.entries(body).forEach((e) => {
 			if (e[1].length === 0) {
@@ -136,16 +175,22 @@ app.post('/update', (req, res) => {
 			WHERE uid=${ id }`
 		pool.query(cmd, Object.values(body), (err, results) => {
 			if (err) {
-				console.log(err)
-				res.send('500 error')
+				res.render('pages/msg', {
+					'code': 500, 
+					'msgTitle': "Error", 
+					'msg': "Ooopps! Errors occured!"
+				})
 			} else {
 				console.log(results)
 				res.redirect(`/details?id=${ id }`)
-				// res.send('200 OK')
 			}
 		})
 	} else {
-		res.send('Invalid parameter')
+		res.render('pages/msg', {
+			'code': 404, 
+			'msgTitle': "Not found", 
+			'msg': "Sorry~ The Tokimon you are looking for does not exist"
+		})
 	}
 })
 
@@ -155,18 +200,33 @@ app.get('/remove', (req, res) => {
 		let cmd = `DELETE FROM Tokimon WHERE uid=${ id }`
 		pool.query(cmd, (err, results) => {
 			if (err) {
-				console.log(err)
-				res.send('500 error')
+				res.render('pages/msg', {
+					'code': 500, 
+					'msgTitle': "Error", 
+					'msg': "Ooopps! Errors occured!"
+				})
 			} else {
 				if (results.rowCount === 1) {
-					res.send('OK')
+					res.render('pages/msg', {
+						'code': 200, 
+						'msgTitle': "Success", 
+						'msg': "Your Tokimon has been successfully removed from the list"
+					})
 				} else {
-					res.send('Deleted 0 row')
+					res.render('pages/msg', {
+						'code': 404, 
+						'msgTitle': "Not found", 
+						'msg': "Sorry~ The Tokimon you are looking for does not exist"
+					})
 				}
 			}
 		})
 	} else {
-		res.send('Invalid parameter')
+		res.render('pages/msg', {
+			'code': 404, 
+			'msgTitle': "Not found", 
+			'msg': "Sorry~ The Tokimon you are looking for does not exist"
+		})
 	}
 })
 
@@ -176,11 +236,18 @@ app.get('/trainer', (req, res) => {
 		let cmd = `SELECT * FROM Tokimon WHERE trainer='${ trainer }'`
 		pool.query(cmd, (err, results) => {
 			if (err) {
-				console.log(err)
-				res.send('500 error')
+				res.render('pages/msg', {
+					'code': 500, 
+					'msgTitle': "Error", 
+					'msg': "Ooopps! Errors occured!"
+				})
 			}
 			if (results.rows.length === 0) {
-				res.send('not found')
+				res.render('pages/msg', {
+					'code': 404, 
+					'msgTitle': "Not found", 
+					'msg': "Sorry~ The trainer you are looking for does not exist"
+				})
 			} else {
 				res.render('pages/trainer', {
 					'trainer': trainer, 
@@ -189,7 +256,11 @@ app.get('/trainer', (req, res) => {
 			}
 		})
 	} else {
-		res.send('Invalid parameter')
+		res.render('pages/msg', {
+			'code': 404, 
+			'msgTitle': "Not found", 
+			'msg': "Sorry~ The trainer you are looking for does not exist"
+		})
 	}
 })
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tokimon - Message</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/form.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/msg.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/Nav.css">
+</head>
+<body>
+  <div class="nav-bar">
+    <div class="nav-bar-align">
+      <ul>
+        <li class="nav-home">
+          <a class="nav-font" href="/home">Home</a>
+        </li>
+        <li class="nav-add">
+          <a class="nav-font" href="/new">Add</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="column">
+    <div class="msgbox">
+      <div class="msg-border">
+        <div class="msg-title"><%= msgTitle %></div>
+        <div class="msg"><%= msg %></div>
+        <div class="msg-button-container">
+          <button type="button" onclick="window.location.href='/home'" class="button">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
