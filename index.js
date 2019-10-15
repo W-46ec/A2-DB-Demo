@@ -29,13 +29,12 @@ app.get('/home', (req, res) => {
 	let cmd = `SELECT * FROM Tokimon ORDER BY uid`
 	pool.query(cmd, (err, results) => {
 		if (err) {
-			res.render('pages/msg', {
-				'code': 500, 
+			res.status(500).render('pages/msg', {
 				'msgTitle': "Error", 
-				'msg': "Ooopps! Errors occured!"
+				'msg': "Oops! Errors occured!"
 			})
 		}
-		res.render('pages/home', { 'rows': results.rows })
+		res.status(200).render('pages/home', { 'rows': results.rows })
 	})
 })
 
@@ -45,20 +44,18 @@ app.get('/details', (req, res) => {
 		let cmd = `SELECT * FROM Tokimon WHERE uid=${ id }`
 		pool.query(cmd, (err, results) => {
 			if (err) {
-				res.render('pages/msg', {
-					'code': 500, 
+				res.status(500).render('pages/msg', {
 					'msgTitle': "Error", 
-					'msg': "Ooopps! Errors occured!"
+					'msg': "Oops! Errors occured!"
 				})
 			}
 			if (results.rows.length === 0) {
-				res.render('pages/msg', {
-					'code': 404, 
+				res.status(404).render('pages/msg', {
 					'msgTitle': "Not found", 
 					'msg': "Sorry~ The Tokimon you are looking for does not exist"
 				})
 			} else {
-				res.render('pages/form', {
+				res.status(200).render('pages/form', {
 					'title': "Details", 
 					'readOnly': "readonly", 
 					'inputClass': "detail-input", 
@@ -69,20 +66,18 @@ app.get('/details', (req, res) => {
 			}
 		})
 	} else {
-		res.render('pages/msg', {
-			'code': 404, 
+		res.status(404).render('pages/msg', {
 			'msgTitle': "Not found", 
 			'msg': "Sorry~ The Tokimon you are looking for does not exist"
 		})
 	}
 })
 
-app.get('/new', (req, res) => { res.render('pages/new') })
+app.get('/new', (req, res) => { res.status(200).render('pages/new') })
 app.post('/add', (req, res) => {
 	let body = req.body
 	if (body.name.length === 0) {
-		res.render('pages/msg', {
-			'code': 404, 
+		res.status(404).render('pages/msg', {
 			'msgTitle': "Invalid inputs", 
 			'msg': "Sorry~ Seems like the request is not valid"
 		})
@@ -102,14 +97,12 @@ app.post('/add', (req, res) => {
 	) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`
 	pool.query(cmd, Object.values(body), (err, results) => {
 		if (err) {
-			res.render('pages/msg', {
-				'code': 500, 
+			res.status(500).render('pages/msg', {
 				'msgTitle': "Error", 
-				'msg': "Ooopps! Errors occured!"
+				'msg': "Oops! Errors occured!"
 			})
 		}
-		res.render('pages/msg', {
-			'code': 200, 
+		res.status(200).render('pages/msg', {
 			'msgTitle': "Success", 
 			'msg': "Your Tokimon has been added successfully!"
 		})
@@ -122,20 +115,18 @@ app.get('/edit', (req, res) => {
 		let cmd = `SELECT * FROM Tokimon WHERE uid=${ id }`
 		pool.query(cmd, (err, results) => {
 			if (err) {
-				res.render('pages/msg', {
-					'code': 500, 
+				res.status(500).render('pages/msg', {
 					'msgTitle': "Error", 
-					'msg': "Ooopps! Errors occured!"
+					'msg': "Oops! Errors occured!"
 				})
 			}
 			if (results.rows.length === 0) {
-				res.render('pages/msg', {
-					'code': 404, 
+				res.status(404).render('pages/msg', {
 					'msgTitle': "Not found", 
 					'msg': "Sorry~ The Tokimon you are looking for does not exist"
 				})
 			} else {
-				res.render('pages/form', {
+				res.status(200).render('pages/form', {
 					'title': "Edit Tokimon", 
 					'readOnly': "", 
 					'inputClass': "edit-input", 
@@ -146,8 +137,7 @@ app.get('/edit', (req, res) => {
 			}
 		})
 	} else {
-		res.render('pages/msg', {
-			'code': 404, 
+		res.status(404).render('pages/msg', {
 			'msgTitle': "Not found", 
 			'msg': "Sorry~ The Tokimon you are looking for does not exist"
 		})
@@ -158,8 +148,7 @@ app.post('/update', (req, res) => {
 		let id = req.query.id
 		let body = req.body
 		if (body.name.length === 0) {
-			res.render('pages/msg', {
-				'code': 404, 
+			res.status(400).render('pages/msg', {
 				'msgTitle': "Invalid inputs", 
 				'msg': "Sorry~ Seems like the request is not valid"
 			})
@@ -180,8 +169,7 @@ app.post('/update', (req, res) => {
 			WHERE uid=${ id }`
 		pool.query(cmd, Object.values(body), (err, results) => {
 			if (err) {
-				res.render('pages/msg', {
-					'code': 500, 
+				res.status(500).render('pages/msg', {
 					'msgTitle': "Error", 
 					'msg': "Ooopps! Errors occured!"
 				})
@@ -190,8 +178,7 @@ app.post('/update', (req, res) => {
 			}
 		})
 	} else {
-		res.render('pages/msg', {
-			'code': 404, 
+		res.status(404).render('pages/msg', {
 			'msgTitle': "Not found", 
 			'msg': "Sorry~ The Tokimon you are looking for does not exist"
 		})
@@ -204,21 +191,18 @@ app.get('/remove', (req, res) => {
 		let cmd = `DELETE FROM Tokimon WHERE uid=${ id }`
 		pool.query(cmd, (err, results) => {
 			if (err) {
-				res.render('pages/msg', {
-					'code': 500, 
+				res.status(500).render('pages/msg', {
 					'msgTitle': "Error", 
-					'msg': "Ooopps! Errors occured!"
+					'msg': "Oops! Errors occured!"
 				})
 			} else {
 				if (results.rowCount === 1) {
-					res.render('pages/msg', {
-						'code': 200, 
+					res.status(200).render('pages/msg', {
 						'msgTitle': "Success", 
 						'msg': "Your Tokimon has been removed from the list"
 					})
 				} else {
-					res.render('pages/msg', {
-						'code': 404, 
+					res.status(404).render('pages/msg', {
 						'msgTitle': "Not found", 
 						'msg': "Sorry~ The Tokimon you are looking for does not exist"
 					})
@@ -226,8 +210,7 @@ app.get('/remove', (req, res) => {
 			}
 		})
 	} else {
-		res.render('pages/msg', {
-			'code': 404, 
+		res.status(404).render('pages/msg', {
 			'msgTitle': "Not found", 
 			'msg': "Sorry~ The Tokimon you are looking for does not exist"
 		})
@@ -240,32 +223,37 @@ app.get('/trainer', (req, res) => {
 		let cmd = `SELECT * FROM Tokimon WHERE trainer='${ trainer }'`
 		pool.query(cmd, (err, results) => {
 			if (err) {
-				res.render('pages/msg', {
-					'code': 500, 
+				res.status(500).render('pages/msg', {
 					'msgTitle': "Error", 
-					'msg': "Ooopps! Errors occured!"
+					'msg': "Oops! Errors occured!"
 				})
 			}
 			if (results.rows.length === 0) {
-				res.render('pages/msg', {
-					'code': 404, 
+				res.status(404).render('pages/msg', {
 					'msgTitle': "Not found", 
 					'msg': "Sorry~ The trainer you are looking for does not exist"
 				})
 			} else {
-				res.render('pages/trainer', {
+				res.status(200).render('pages/trainer', {
 					'trainer': trainer, 
 					'rows': results.rows
 				})
 			}
 		})
 	} else {
-		res.render('pages/msg', {
-			'code': 404, 
+		res.status(404).render('pages/msg', {
 			'msgTitle': "Not found", 
 			'msg': "Sorry~ The trainer you are looking for does not exist"
 		})
 	}
+})
+
+// 404 page
+app.use((req, res) => {
+	res.status(404).render('pages/msg', {
+		'msgTitle': "Not found", 
+		'msg': "Oops! Page not found"
+	})
 })
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
