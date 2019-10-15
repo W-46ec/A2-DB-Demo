@@ -5,26 +5,29 @@
   <title>Tokimon - Home</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/home.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/Nav.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/form.css">
 </head>
 <body>
   <div class="nav-bar">
     <div class="nav-bar-align">
       <ul>
         <li class="nav-link">
-          <a class="nav-font" href="/home">Home</a>
+          <a class="nav-font" href="/home">Tokimons</a>
         </li>
         <li class="nav-link">
           <a class="nav-font" href="/trainersinfo">Trainers</a>
-        </li>
-        <li class="nav-link">
-          <a class="nav-font" href="/new">Add</a>
         </li>
       </ul>
     </div>
   </div>
   <div class="column">
     <div class="table-container">
-      <div class="title-font">Tokimons</div>
+      <div class="title-container">
+        <div class="title-font">Tokimons</div>
+        <div class="button-add-container">
+          <button class="button-add" type="button" onclick="window.location.href='/new'">Add</button>
+        </div>
+      </div>
       <table id="table">
         <tr>
           <th class="th-id">#</th>
