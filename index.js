@@ -25,6 +25,7 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => res.render('pages/index'))
 
+// Home page
 app.get('/home', (req, res) => {
 	let cmd = `SELECT * FROM Tokimon ORDER BY uid`
 	pool.query(cmd, (err, results) => {
@@ -38,6 +39,7 @@ app.get('/home', (req, res) => {
 	})
 })
 
+// Details page
 app.get('/details', (req, res) => {
 	if (req.query.id) {
 		let id = req.query.id
@@ -73,7 +75,9 @@ app.get('/details', (req, res) => {
 	}
 })
 
+// Page for adding a new Tokimon
 app.get('/new', (req, res) => { res.status(200).render('pages/new') })
+// Adding a new Tokimon to the database
 app.post('/add', (req, res) => {
 	let body = req.body
 	if (body.name.length === 0) {
@@ -109,6 +113,7 @@ app.post('/add', (req, res) => {
 	})
 })
 
+// Edit page
 app.get('/edit', (req, res) => {
 	if (req.query.id) {
 		let id = req.query.id
@@ -143,6 +148,7 @@ app.get('/edit', (req, res) => {
 		})
 	}
 })
+// Update the information of a Tokimon
 app.post('/update', (req, res) => {
 	if (req.query.id) {
 		let id = req.query.id
@@ -185,6 +191,7 @@ app.post('/update', (req, res) => {
 	}
 })
 
+// Remove a Tokimon
 app.get('/remove', (req, res) => {
 	if (req.query.id) {
 		let id = req.query.id
@@ -217,6 +224,7 @@ app.get('/remove', (req, res) => {
 	}
 })
 
+// Trainer details page
 app.get('/trainer', (req, res) => {
 	if (req.query.trainer) {
 		let trainer = req.query.trainer
@@ -248,6 +256,7 @@ app.get('/trainer', (req, res) => {
 	}
 })
 
+// All trainers information
 app.get('/trainersinfo', (req, res) => {
 	let cmd = `SELECT * FROM Tokimon ORDER BY trainer`
 	pool.query(cmd, (err, results) => {
