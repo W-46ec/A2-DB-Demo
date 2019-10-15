@@ -19,7 +19,7 @@ ul {
 	margin: 0;
 	padding: 0;
 }
-.nav-home, .nav-add {
+.nav-link {
 	float: left;
 	width: 7%;
 	height: 100%;

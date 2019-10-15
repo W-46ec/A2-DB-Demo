@@ -51,6 +51,9 @@ td {
 .th-name, .th-trainer, .th-op {
 	width: 30%;
 }
+.th-trainer, .th-num {
+	width: 50%;
+}
 
 .link {
 	color: #4691f6;

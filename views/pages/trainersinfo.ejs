@@ -10,10 +10,13 @@
   <div class="nav-bar">
     <div class="nav-bar-align">
       <ul>
-        <li class="nav-home">
+        <li class="nav-link">
           <a class="nav-font" href="/home">Home</a>
         </li>
-        <li class="nav-add">
+        <li class="nav-link">
+          <a class="nav-font" href="/trainersinfo">Trainers</a>
+        </li>
+        <li class="nav-link">
           <a class="nav-font" href="/new">Add</a>
         </li>
       </ul>
@@ -21,25 +24,18 @@
   </div>
   <div class="column">
     <div class="table-container">
-      <div class="title-font"><%= trainer %>'s Tokimons</div>
+      <div class="title-font">Trainers</div>
       <table id="table">
         <tr>
           <th class="th-id">#</th>
-          <th class="th-name">Name</th>
-          <th class="th-age">Age</th>
-          <th class="th-op">Operations</th>
+          <th class="th-trainer">Trainer</th>
+          <th class="th-num">Number of Tokimons</th>
         </tr>
         <% rows.forEach((e, idx) => { %>
           <tr>
             <td><%= idx + 1 %></td>
-            <td><a class="link" title="Details" href="/details?id=<%= e.uid %>"><%= e.name %></a></td>
-            <td><%= e.age %></td>
-            <td>
-              <div>
-                <a class="link" title="Edit" href="/edit?id=<%= e.uid %>">Edit</a>
-                <a class="link" title="Remove" href="/remove?id=<%= e.uid %>" onclick="return confirm('Are you sure you want to delete?')">Remove</a>
-              </div>
-            </td>
+            <td><a class="link" title="Details" href="/trainer?trainer=<%= e.trainer %>"><%= e.trainer %></a></td>
+            <td><%= e.num %></td>
           </tr>
         <% }) %>
       </table>

@@ -248,6 +248,35 @@ app.get('/trainer', (req, res) => {
 	}
 })
 
+app.get('/trainersinfo', (req, res) => {
+	let cmd = `SELECT * FROM Tokimon ORDER BY trainer`
+	pool.query(cmd, (err, results) => {
+		if (err) {
+			res.status(500).render('pages/msg', {
+				'msgTitle': "Error", 
+				'msg': "Oops! Errors occured!"
+			})
+		}
+		let rows = [], trainers = {}
+		for (let i = 0; i < results.rows.length; i++) {
+			if (trainers[results.rows[i]['trainer']]) {
+				trainers[results.rows[i]['trainer']]++;
+			} else {
+				trainers[results.rows[i]['trainer']] = 1;
+			}
+		}
+		for (let [key, value] of Object.entries(trainers)) {
+			rows.push({
+				"trainer": key, 
+				"num": value
+			})
+		}
+		res.status(200).render('pages/trainersinfo', {
+			'rows': rows
+		})
+	})
+})
+
 // 404 page
 app.use((req, res) => {
 	res.status(404).render('pages/msg', {
