@@ -51,6 +51,20 @@ body {
 	font-family: "OpenSans", "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
+.select-box {
+	width: 100%;
+	margin-top: 5px;
+	height: 24px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+	font-family: "OpenSans", "Roboto", "Helvetica", "Arial", sans-serif;
+	font-size: 1em;
+	cursor: text;
+	outline: none;
+}
+
 .edit-input {
 	width: 100%;
 	margin-top: 5px;

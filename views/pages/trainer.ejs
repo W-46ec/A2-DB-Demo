@@ -29,6 +29,8 @@
           <th class="th-id">#</th>
           <th class="th-name-trainer">Tokimon</th>
           <th class="th-age">Age</th>
+          <th class="th-gender">Gender</th>
+          <th class="th-level">Level</th>
           <th class="th-op-trainer">Operations</th>
         </tr>
         <% rows.forEach((e, idx) => { %>
@@ -36,6 +38,8 @@
             <td><%= idx + 1 %></td>
             <td><a class="link" title="Details" href="/details?id=<%= e.uid %>"><%= e.name %></a></td>
             <td><%= e.age %></td>
+            <td><%= e.gender %></td>
+            <td><%= e.level %></td>
             <td>
               <div>
                 <a class="link" title="Edit" href="/edit?id=<%= e.uid %>">Edit</a>

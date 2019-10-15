@@ -60,6 +60,7 @@ app.get('/details', (req, res) => {
 				res.status(200).render('pages/form', {
 					'title': "Details", 
 					'readOnly': "readonly", 
+					'disableSelect': "disabled", 
 					'inputClass': "detail-input", 
 					'hiddenEdit': "", 
 					'hiddenSave': "hidden", 
@@ -80,8 +81,9 @@ app.get('/new', (req, res) => { res.status(200).render('pages/new') })
 // Adding a new Tokimon to the database
 app.post('/add', (req, res) => {
 	let body = req.body
-	if (body.name.length === 0) {
-		res.status(404).render('pages/msg', {
+	if (!(body.name) || body.name.length === 0 || 
+		!(body.gender) || body.gender.length === 0) {
+		res.status(400).render('pages/msg', {
 			'msgTitle': "Invalid inputs", 
 			'msg': "Sorry~ Seems like the request is not valid"
 		})
@@ -89,16 +91,17 @@ app.post('/add', (req, res) => {
 	}
 	Object.entries(body).forEach((e) => {
 		if (e[1].length === 0) {
-			if (e[0] != 'trainer') {
-				body[e[0]] = 0
+			if (e[0] === 'trainer') {
+				body[e[0]] = "Unknown"
 			} else {
-				body[e[0]] = "unknown"
+				body[e[0]] = 0
 			}
 		}
 	})
 	let cmd = `INSERT INTO Tokimon (
-		name, age, weight, height, fly, fight, fire, water, electric, frozen, trainer
-	) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`
+		name, gender, level, age, weight, height, fly, 
+		fight, fire, water, electric, frozen, trainer
+	) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`
 	pool.query(cmd, Object.values(body), (err, results) => {
 		if (err) {
 			res.status(500).render('pages/msg', {
@@ -134,6 +137,7 @@ app.get('/edit', (req, res) => {
 				res.status(200).render('pages/form', {
 					'title': "Edit Tokimon", 
 					'readOnly': "", 
+					'disableSelect': "", 
 					'inputClass': "edit-input", 
 					'hiddenEdit': "hidden", 
 					'hiddenSave': "", 
@@ -153,7 +157,8 @@ app.post('/update', (req, res) => {
 	if (req.query.id) {
 		let id = req.query.id
 		let body = req.body
-		if (body.name.length === 0) {
+		if (!(body.name) || body.name.length === 0 || 
+			!(body.gender) || body.gender.length === 0) {
 			res.status(400).render('pages/msg', {
 				'msgTitle': "Invalid inputs", 
 				'msg': "Sorry~ Seems like the request is not valid"
@@ -162,16 +167,16 @@ app.post('/update', (req, res) => {
 		}
 		Object.entries(body).forEach((e) => {
 			if (e[1].length === 0) {
-				if (e[0] != 'trainer') {
-					body[e[0]] = 0
+				if (e[0] === 'trainer') {
+					body[e[0]] = "Unknown"
 				} else {
-					body[e[0]] = "unknown"
+					body[e[0]] = 0
 				}
 			}
 		})
 		let cmd = `UPDATE Tokimon SET 
-			name=$1, age=$2, weight=$3, height=$4, fly=$5, fight=$6,  
-			fire=$7, water=$8, electric=$9, frozen=$10, trainer=$11
+			name=$1, gender=$2, level=$3, age=$4, weight=$5, height=$6, fly=$7, 
+			fight=$8, fire=$9, water=$10, electric=$11, frozen=$12, trainer=$13
 			WHERE uid=${ id }`
 		pool.query(cmd, Object.values(body), (err, results) => {
 			if (err) {

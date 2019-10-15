@@ -24,10 +24,23 @@
     <div class="form-container">
       <div class="border">
         <div class="form-font">Add New Tokimon</div>
-        <form action="/add" method="post">
+        <form id="form" action="/add" method="post">
           <div class="entry">
             <div id="name" class="title">Name *</div>
             <input type="text" class="edit-input" name="name" placeholder="Name of Tokimon" title="This field is required" required>
+          </div>
+          <div class="entry">
+            <div class="title">Gender</div>
+            <select class="select-box" name="gender" form="form" required>
+              <option disabled selected value>Select</option>
+              <option>Other</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+          <div class="entry">
+            <div class="title">Level</div>
+            <input type="number" min="0" max="100" class="edit-input" name="level" placeholder="Level of Tokimon" id="num">
           </div>
           <div class="entry">
             <div class="title">Age</div>
