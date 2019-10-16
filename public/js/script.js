@@ -36,3 +36,43 @@ for (let i = 0; i < boxes.length; i++) {
 		}
 	})
 }
+
+let abilities = document.getElementsByTagName('input')
+let total = document.getElementById('total')
+if (total) {
+	total.style.backgroundColor = "rgb(57, 66, 78, 0.15)"
+	let totalAbility = 0
+	for (let i = 0; i < abilities.length; i++) {
+		if (abilities[i].id === 'ability') {
+			totalAbility += parseInt(abilities[i].value)
+		}
+	}
+	total.value = totalAbility
+	for (let i = 0; i < abilities.length; i++) {
+		if (abilities[i].id === 'ability') {
+			abilities[i].addEventListener('keyup', () => {
+				let total = document.getElementById('total')
+				let tmp = document.getElementsByTagName('input')
+				let sum = 0
+				for (let j = 0; j < tmp.length; j++) {
+					if (tmp[j].id === 'ability') {
+						sum += tmp[j].value.length === 0 ? 0 : parseInt(tmp[j].value)
+					}
+				}
+				total.value = sum
+			})
+			abilities[i].addEventListener('change', () => {
+				let total = document.getElementById('total')
+				let tmp = document.getElementsByTagName('input')
+				let sum = 0
+				for (let j = 0; j < tmp.length; j++) {
+					if (tmp[j].id === 'ability') {
+						sum += tmp[j].value.length === 0 ? 0 : parseInt(tmp[j].value)
+					}
+				}
+				total.value = sum
+			})
+		}
+	}
+}
+

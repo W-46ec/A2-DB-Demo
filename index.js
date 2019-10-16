@@ -89,6 +89,7 @@ app.post('/add', (req, res) => {
 		})
 		return;
 	}
+	let total = 0
 	Object.entries(body).forEach((e) => {
 		if (e[1].length === 0) {
 			if (e[0] === 'trainer') {
@@ -96,13 +97,23 @@ app.post('/add', (req, res) => {
 			} else {
 				body[e[0]] = 0
 			}
+		} else {
+			if (e[0] != 'name' && 
+				e[0] != 'gender' && 
+				e[0] != 'level' && 
+				e[0] != 'age' && 
+				e[0] != 'trainer') {
+				total += parseInt(body[e[0]])
+			}
 		}
 	})
+	let data = Object.values(body)
+	data.push(total)
 	let cmd = `INSERT INTO Tokimon (
 		name, gender, level, age, weight, height, fly, 
-		fight, fire, water, electric, frozen, trainer
-	) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`
-	pool.query(cmd, Object.values(body), (err, results) => {
+		fight, fire, water, electric, frozen, trainer, total
+	) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)`
+	pool.query(cmd, data, (err, results) => {
 		if (err) {
 			res.status(500).render('pages/msg', {
 				'msgTitle': "Error", 
@@ -165,6 +176,7 @@ app.post('/update', (req, res) => {
 			})
 			return;
 		}
+		let total = 0
 		Object.entries(body).forEach((e) => {
 			if (e[1].length === 0) {
 				if (e[0] === 'trainer') {
@@ -172,11 +184,24 @@ app.post('/update', (req, res) => {
 				} else {
 					body[e[0]] = 0
 				}
+			} else {
+				if (e[0] != 'name' && 
+					e[0] != 'gender' && 
+					e[0] != 'level' && 
+					e[0] != 'age' && 
+					e[0] != 'trainer' && 
+					e[0] != 'total') {
+					total += parseInt(body[e[0]])
+				}
 			}
 		})
+		if ((body['total'] != undefined) && 
+			(parseInt(body['total']) != total)) {
+			body['total'] = total.toString()
+		}
 		let cmd = `UPDATE Tokimon SET 
-			name=$1, gender=$2, level=$3, age=$4, weight=$5, height=$6, fly=$7, 
-			fight=$8, fire=$9, water=$10, electric=$11, frozen=$12, trainer=$13
+			name=$1, gender=$2, level=$3, age=$4, weight=$5, height=$6, fly=$7, fight=$8, 
+			fire=$9, water=$10, electric=$11, frozen=$12, total=$13, trainer=$14
 			WHERE uid=${ id }`
 		pool.query(cmd, Object.values(body), (err, results) => {
 			if (err) {

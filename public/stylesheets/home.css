@@ -44,11 +44,13 @@ body {
 }
 
 .table-container {
+	margin: auto;
 	margin-top: 40px;
 	padding-left: 20%;
 	padding-right: 20%;
 }
 table {
+	margin: auto;
 	border: 1px solid #cccccc;
 	border-collapse: collapse;
 	position: relative;
@@ -74,7 +76,7 @@ td {
 .th-id, .th-age, .th-level {
 	width: 3em;
 }
-.th-name, .th-trainer, .th-gender, .th-op {
+.th-name, .th-trainer, .th-gender, .th-op, .th-total {
 	width: 30%;
 }
 .th-name-trainer, .th-op-trainer {

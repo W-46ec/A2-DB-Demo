@@ -31,6 +31,7 @@
           <th class="th-age">Age</th>
           <th class="th-gender">Gender</th>
           <th class="th-level">Level</th>
+          <th class="th-total">Total</th>
           <th class="th-op-trainer">Operations</th>
         </tr>
         <% rows.forEach((e, idx) => { %>
@@ -40,6 +41,7 @@
             <td><%= e.age %></td>
             <td><%= e.gender %></td>
             <td><%= e.level %></td>
+            <td><%= e.total %></td>
             <td>
               <div>
                 <a class="link" title="Edit" href="/edit?id=<%= e.uid %>">Edit</a>
